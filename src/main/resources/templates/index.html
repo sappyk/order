@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eye Vision orders list</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand"><img src="img/logo.jpg" width="150" height="70" alt="Logo"/> <b>Order list</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Add order
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<table id="orderTable" class="table table-striped table-bordered" align="center" style="width:100%" border="1">
+    <thead>
+    <tr>
+        <th class="table-active">Order date</th>
+        <th class="table-active">Surname</th>
+        <th class="table-active">Name</th>
+        <th class="table-active">Middle Name</th>
+        <th class="table-active">Birthdate</th>
+        <th class="table-active">Phone</th>
+        <th class="table-active">Orders</th>
+        <th class="table-active">Даль OD</th>
+        <th class="table-active">Даль Cyl OD</th>
+        <th class="table-active">Даль Ax OD</th>
+        <th class="table-active">Даль ОS</th>
+        <th class="table-active">Даль Сyl OS</th>
+        <th class="table-active">Даль Ax OS</th>
+        <th class="table-active">Расстояние даль</th>
+        <th class="table-active">Близь OD</th>
+        <th class="table-active">Близь Cyl OD</th>
+        <th class="table-active">Близь Ax OD</th>
+        <th class="table-active">Близь OS</th>
+        <th class="table-active">Близь Cyl OS</th>
+        <th class="table-active">Близь Ax OS</th>
+        <th class="table-active">Расстояние близь</th>
+        <th class="table-active">Среднее OD</th>
+        <th class="table-active">Среднее Cyl OD</th>
+        <th class="table-active">Среднее Ax OD</th>
+        <th class="table-active">Среднее OS</th>
+        <th class="table-active">Среднее Cyl OS</th>
+        <th class="table-active">Среднее Ax OS</th>
+        <th class="table-active">Расстояние среднее</th>
+        <th class="table-active">Note</th>
+        <th class="table-active">Delete</th>
+        <th class="table-active">Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+
+<!-- Модальное окно создания нового заказа -->
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">СОЗДАТЬ ЗАКАЗ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-6" style=" float: left;">
+                    <div class="form-group">
+                        <label for="inputDateOrder">Дата приема</label>
+                        <input type="date" class="form-control" id="inputDateOrder">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLastName">Фамилия</label>
+                        <input type="text" class="form-control" id="inputLastName" pattern="[а-яА-Я]{1,30}" autofocus
+                               required title="Фамилия">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Имя</label>
+                        <input type="text" class="form-control" id="inputName" pattern="[а-яА-Я]{1,30}" autofocus
+                               required title="Имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPatronymic">Отчество</label>
+                        <input type="text" class="form-control" id="inputPatronymic" pattern="[\sа-яА-Я-]{1,40}"
+                               autofocus required title="Отчество">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBirthday">Дата рождения</label>
+                        <input type="date" class="form-control" id="inputBirthday">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone">Телефон</label>
+                        <input type="text" class="form-control" id="inputPhone" pattern="[0-9]{1,18}" autofocus required
+                               title="Номер телефона">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputOrder">Заказы</label>
+                        <input type="text" class="form-control" id="inputOrder" pattern="[а-яА-Я]{1,250}" autofocus
+                               required title="Заказы">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeOd">Среднее OD</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputSredneeOd" autofocus required title="Среднее OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeCylOd">Среднее Cyl OD</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputSredneeCylOd" autofocus required title="Среднее Cyl OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeAxOd">Среднее Ax OD</label>
+                        <input type="number" step="1" min="1" max="180" value="0" class="form-control"
+                               id="inputSredneeAxOd" autofocus required title="Среднее Oд">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeOs">Среднее OS</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputSredneeOs" autofocus required title="Среднее Os">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeCylOs">Среднее Cyl OS</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputSredneeCylOs" autofocus required title="Среднее Cyl OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeAxOs">Среднее Ax OS</label>
+                        <input type="number" step="1" min="1" max="180" value="0" class="form-control"
+                               id="inputSredneeAxOs" autofocus required title="Среднее Ax OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSredneeRas">Расстояние среднее</label>
+                        <input type="number" step="1" min="10" max="100" value="0" class="form-control"
+                               id="inputSredneeRas" autofocus required title="Расстояние среднее">
+                    </div>
+                    <div class="form-group">
+                        <label for="textareaComment">Примечание</label>
+                        <textarea class="form-control" id="textareaComment" rows="3" maxlength="500"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style=" float: right;">
+                    <div class="form-group">
+                        <label for="inputDalOd">Даль OD</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputDalOd" autofocus required title="Даль OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDalCylOd">Даль Cyl OD</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputDalCylOd" autofocus required title="Даль Cyl OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDalAxOd">Даль Ax OD</label>
+                        <input type="number" step="1" min="1" max="180" value="0" class="form-control" id="inputDalAxOd"
+                               autofocus required title="Даль Ax OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDalOs">Даль OS</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputDalOs" autofocus required title="Даль OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDalCylOs">Даль Cyl OS</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputDalCylOs" autofocus required title="Даль Cyl OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDalAxOs">Даль Ax OS</label>
+                        <input type="number" step="1" min="1" max="180" value="0" class="form-control" id="inputDalAxOs"
+                               autofocus required title="Даль Ax OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRc">Расстояние даль</label>
+                        <input type="number" step="1" min="10" max="100" value="0" class="form-control" id="inputRc"
+                               autofocus required title="Расстояние даль">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBlizOd">Близь OD</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputBlizOd" autofocus required title="Близь OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBlizCylOd">Близь Cyl OD</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputBlizCylOd" autofocus required title="Близь Cyl OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBlizAxOd">Близь Ax OD</label>
+                        <input type="number" step="1" min="1" max="180" value="0" class="form-control"
+                               id="inputBlizAxOd" autofocus required title="Близь Ax OD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBlizOs">Близь OS</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputBlizOs" autofocus required title="Близь OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBlizCylOs">Близь Cyl OS</label>
+                        <input type="number" step="0.25" min="-16" max="16" value="0" class="form-control"
+                               id="inputBlizCylOs" autofocus required title="Близь Cyl OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBlizAxOs">Близь Ax OS</label>
+                        <input type="number" step="1" min="1" max="180" value="0" class="form-control"
+                               id="inputBlizAxOs" autofocus required title="Близь Ax OS">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRcBliz">Расстояние близь</label>
+                        <input type="number" step="1" min="10" max="100" value="0" class="form-control" id="inputRcBliz"
+                               autofocus required title="Расстояние близь">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-danger" onclick="addOrder();">Создать заказ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Детальная информация</h4>
+            </div>
+            <div class="modal-body">
+
+                <form action="/edit/update" method="post">
+                    <input type="text" hidden name="id" id="orderid"/>
+
+                    <div class="form-group row">
+                        <label for="orderDate1" class="col-sm-2 col-form-label"><b>Дата приема:</b></label>
+                        <div class="col-sm-10">
+                            <input type="date" required class="form-control-plaintext" name="orderDate" id="orderDate1">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="lastName1" class="col-sm-2 col-form-label"><b>Фамилия:</b></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control-plaintext" name="lastName" id="lastName1"
+                                   placeholder="Введите фамилию">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name1" class="col-sm-2 col-form-label"><b>Имя:</b></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control-plaintext" name="name" id="name1"
+                                   placeholder="Введите имя"/></i></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="patronymic1" class="col-sm-2 col-form-label"><b>Отчество:</b></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control-plaintext" name="patronymic" id="patronymic1"
+                                   placeholder="Введите отчество"/></i></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="birthday1" class="col-sm-2 col-form-label"><b>Дата рождения:</b></label>
+                        <div class="col-sm-10">
+                            <input type="date" required class="form-control-plaintext" name="orderDate" id="birthday1">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="phone_number1" class="col-sm-2 col-form-label"><b>Номер телефона:</b></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control-plaintext" name="phone_number" id="phone_number1"
+                                   placeholder="Введите номер телефона"/></i></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="orders1" class="col-sm-2 col-form-label"><b>Заказы:</b></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control-plaintext" name="orders" id="orders1"
+                                   placeholder="Введите заказы"/></i></div>
+                    </div>
+
+                    <div class="dal_od"><p><b>Даль OD: </b> <i><span></span></i></p></div>
+                    <div class="dal_cyl_od"><p><b>Даль Cyl OD: </b> <i><span></span></i></p></div>
+                    <div class="dal_ax_od"><p><b>Даль Ax OD: </b> <i><span></span></i></p></div>
+                    <div class="dal_os"><p><b>Даль OS: </b> <i><span></span> </i></p></div>
+                    <div class="dal_cyl_os"><p><b>Даль Cyl OS: </b> <i><span></span></i></p></div>
+                    <div class="dal_ax_os"><p><b>Даль Ax OS: </b> <i><span></span></i></p></div>
+                    <div class="rasst_dal"><p><b>Расстояние даль: </b> <i><span></span></i></p></div>
+                    <div class="bliz_od"><p><b>Близь OD: </b> <i><span></span></i></p></div>
+                    <div class="bliz_cyl_od"><p><b>Близь Cyl OD: </b> <i><span></span></i></p></div>
+                    <div class="bliz_ax_od"><p><b>Близь Ax OD: </b> <i><span></span></i></p></div>
+                    <div class="bliz_os"><p><b>Близь OS: </b> <i><span></span> </i></p></div>
+                    <div class="bliz_cyl_os"><p><b>Близь Cyl OS: </b> <i><span></span></i></p></div>
+                    <div class="bliz_ax_os"><p><b>Близь Ax OS: </b> <i><span></span></i></p></div>
+                    <div class="rasst_bliz"><p><b>Расстояние близь: </b> <i><span></span></i></p></div>
+                    <div class="srednee_od"><p><b>Среднее OD: </b> <i><span></span></i></p></div>
+                    <div class="srednee_cyl_od"><p><b>Среднее Cyl OD: </b> <i><span></span></i></p></div>
+                    <div class="srednee_ax_od"><p><b>Среднее Ax OD: </b> <i><span></span></i></p></div>
+                    <div class="srednee_os"><p><b>Среднее OS: </b> <i><span></span> </i></p></div>
+                    <div class="srednee_cyl_os"><p><b>Среднее Cyl OS: </b> <i><span></span></i></p></div>
+                    <div class="srednee_ax_os"><p><b>Среднее Ax OS: </b> <i><span></span></i></p></div>
+                    <div class="rasst_srednee"><p><b>Расстояние среднее: </b> <i><span></span></i></p></div>
+                    <div class="comment"><p><b>Примечание: </b> <i><span></span></i></p></div>
+                    <button type="submit" class="btn btn-secondary buttonCreate">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" data-dismiss="modal">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="js/MyJs.js"></script>
+
+</body>
+</html>

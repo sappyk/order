@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eye Vision список заказов</title>
+
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="css/responsive.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+<body>
+
+<form action="/edit/update" method="post">
+<!--  <input type="text" hidden name="idTopic" value="${topic.id_topic}"/>-->
+  <input type="text" required class="form-control" name="lastName" value="${order.lastName}"/>
+  <p></p>
+
+  <div class="form-group" div align="right">
+    <button type="submit" class="btn btn-secondary buttonCreate">Сохранить</button>
+  </div>
+</form>
+
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="js/MyJs.js"></script>
+
+</body>
+</html>
